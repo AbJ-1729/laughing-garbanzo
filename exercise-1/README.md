@@ -13,12 +13,14 @@ Before you scroll down to the questions, try this:
    order, and how would you know when you've understood something well enough?
    Write that plan down in this README, then actually follow it.
 
-2. **Now go through the questions below and answer them like you're an LLM.**
+   I would first look up the provided reference manuals for g++, make, git and would research sources on web for sockets and memory management in C++
+
+3. **Now go through the questions below and answer them like you're an LLM.**
    No live Googling, no Stack Overflow, no asking ChatGPT mid-question. You may
    refer to notes *you* took during step 1 — that's your context window. Answer
    from what you've internalised.
 
-3. **Reflect on how it went.** Honestly:
+4. **Reflect on how it went.** Honestly:
    - Did your self-directed learning actually prepare you for the questions, or
      did you over-study things that never came up?
    - Which questions blindsided you? Why — was the topic missing from your
