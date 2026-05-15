@@ -8,6 +8,7 @@
 
 int main() {
   // #Question - are these the same type?
+  // Answer: No. `std::string` is a C++ string class with dynamic storage and methods; `char buffer[]` is a fixed-size C-style array used as a raw byte buffer.
   std::string message = "Hello from client";
   const int kPort = 8080;
   const std::string kServerAddress = "127.0.0.1";
