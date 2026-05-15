@@ -6,10 +6,18 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-int main() {
+int main(int argc, char* argv[]) {
   // #Question - are these the same type?
   // Answer: No. `std::string` is a C++ string class with dynamic storage and methods; `char buffer[]` is a fixed-size C-style array used as a raw byte buffer.
   std::string message = "Hello from client";
+  try {
+    //read from command line arg
+    // #Question - how do we read from command line arg?
+    // Answer: We can read from command line arguments using the `argc` and `argv
+    message = std::string(argv[1]);
+  } catch (const std::exception& e) {
+    
+  }
   const int kPort = 8080;
   const std::string kServerAddress = "127.0.0.1";
   sockaddr_in address;
