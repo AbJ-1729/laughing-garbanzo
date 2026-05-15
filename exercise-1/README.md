@@ -48,12 +48,19 @@ close it.
 ## Learn Basics of g++ CLI
 
 - Compile the TCP client and server using `g++` from command line.
+  did using g++ -o <executable_name> <file_name>.cpp
 - What are the most important command line arguments to learn for `g++`?
+  I think --std(for directing which version of C++ to use), -c and -o are most important sincce -c is used in makefiles to just compile and assemble, not link, which ensures that if in a big project base, not all files change, we can simply use pre assembled versions of others(which dont depend on the changed file) and then link them all together for the final output. -W is also useful to enable various types of warnings(e.g. -Wall for all warnings, useful for analysing code quality)
 - What is the difference between debug vs release versions?
+  I honestly didn't expect this to be learnt for g++, thus had not included in my research. Though debug version usually is easier to troubleshoot, and thus has larger binaries, whereas release version is faster and smaller
 - What are the tradeoffs between debug and release versions?
+  The performance and ease of debugging tradeoff
 - What arguments would you use in a debug build?
+  Least optimizations, e.g. -O0
 - What about for release?
+  More optimizations, e.g. -O2
 - What other kinds of build types are useful?
+  -O1(-O) for basic optimizations
 
 ## Learn Basics of Make
 
@@ -61,17 +68,24 @@ close it.
 - [Quickstart tutorial to make](https://makefiletutorial.com/) - Learn make 
   fundamentals with practical examples and common patterns.
 - How else can you learn about make?
+  make -h
 - How can you tell if the resource you are using is correct?
+  official docs!
 - Create a makefile such that when you run `make` with no arguments, it will:
   - Create `build/` directory if it does not exist
   - Create executables **client** and **server** in `build/`, if needed
   - How does make know when it needs to rebuild the executables?
+    By analysing timestamps of all code files and prerequisites
   - Change your Makefile such that `make clean` will remove `build/` and all
     its contents
 - What are the most important command line arguments to learn for make?
+  --always-make, -t
 - What are the most important directives to learn about in Makefile?
+  include
 - What are the most important commands to implement in your Makefile?
+  make all,  make clean
 - Which ones are essential, which ones are nice to haves?
+  clean, install etc. are essential,include is nice to have for convenience
 
 ## Learn Basics of Git
 
