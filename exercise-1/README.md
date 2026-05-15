@@ -109,6 +109,8 @@ close it.
   `"hello message from the command prompt"` to the server
 - Commit your changes into git
 - What do all these headers do?
+  iostream provides basic input output functions, string provides the stl string container.
+  <sys/socket.h> : socket api, <netinet/in.h> : ip definitions, <arpa/inet.h> : encodes ip addresses to machine readable bytes, <sys/types.h> : used by <sys/socket.h> for data types, <unistd.h> : to interface with sockets just like a file
 - How do you find out which part of the below code comes from which header?
 - How do you change the code so that you are sending messages to servers
   other than localhost?
@@ -123,16 +125,24 @@ close it.
 - What is happening in line 31 of `tcp-echo-client.cc`?
   `if (connect(my_sock, (sockaddr *)&address, sizeof(address)) < 0) {`
 - What is the difference between a pointer and a reference?
+  pointer ais the address to the memory location of a variable, a reference is what the pointer points too, the underlying piece of information. If we need to access the value from pointer we need to dereferenc it by *ptr
 - When is it better to use a pointer?
+  When we want just a symbol pointing to that variable in memory, and at times say in vectors if we want to easily jump to next/previous elements(by incrementing/decrementing pointers since contiguous memory taken by vectors)
 - When is it better to use a reference?
+  When we need to modify the underlying value directly, and not create a copy of it
 - What is the difference between `std::string` and a C-style string?
+  std::string is a stl container whereas C style string is a primitive array of char's
 - What type is a C-style string?
+  char[] (array of char)
 - What happens when you iterate a pointer?
+  we jump to the adjacent locations in memory
 - What are the most important safety tips to know when using pointers?
+  we must remember toget a new pointer when the current one becomes dangling(say when we add an element to vector, and it doubles in size, data is moved to a new location, thus the current place where pointer points has garbage value)
 
 ## Learn Basics of Creating a C++ Project in Your IDE
 
 - How do you compile and run your project in your IDE?
+  Use an extension, or personally I prefer using g++ directly from the command line(or integrated terminal in IDEs)
 
 ## Improving Interactions with LLMs
 
@@ -142,6 +152,7 @@ close it.
   protocols?
 - What is the most authoritative source of information about the C++
   programming language?
+  Bjarne Stroustrup's guide on C++!
 - What information can you find about using Markdown when structuring prompts 
   to LLMs?
 - What is the difference between LLM and AI?
