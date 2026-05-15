@@ -23,12 +23,15 @@ Before you scroll down to the questions, try this:
 4. **Reflect on how it went.** Honestly:
    - Did your self-directed learning actually prepare you for the questions, or
      did you over-study things that never came up?
+     Largely I could answer the questions from what i already knew+what i researched, though i think i ended up sourcing more of just the commandline docs.
    - Which questions blindsided you? Why — was the topic missing from your
      plan, or did you skim past it?
+     debug vs release versions in g++! it was missing form my plan
    - Map your experience onto the *known knowns / known unknowns / unknown
      unknowns* idea. The interesting category is usually the last one: things
      you didn't even realise you should have learned. What were yours, and how
      could a better learning plan have surfaced them earlier?
+     Mostly were known knowns, but things like g++ deep dive in debug/release versions, optimizations were unknown unknowns.
 
 The point of this exercise isn't to get the questions "right" — it's to notice
 the gap between how you *think* you learn and how you actually do, so you can
@@ -112,20 +115,26 @@ close it.
   iostream provides basic input output functions, string provides the stl string container.
   <sys/socket.h> : socket api, <netinet/in.h> : ip definitions, <arpa/inet.h> : encodes ip addresses to machine readable bytes, <sys/types.h> : used by <sys/socket.h> for data types, <unistd.h> : to interface with sockets just like a file
 - How do you find out which part of the below code comes from which header?
+  by seeing the methods provided by various headers
 - How do you change the code so that you are sending messages to servers
   other than localhost?
+  By changing the hardcoded 127.0.0.1 address
 - How do you change the code to send to a IPv6 address instead of IPv4?
+  By using AF_INET6 family and ipv6 address 
 - **Bonus**: How do you change the client code to connect by hostname instead
   of IP address?
+  we can use getaddrinfo() provided by the <netdb.h> header and using AF_UNSPEC for resolving to both ipv4 and ipv6 
   
 ## Introduction to Memory Management
 
 - What is happening in line 26 of `tcp-echo-client.cc`? 
   `if (inet_pton(AF_INET, kServerAddress.c_str(), &address.sin_addr) <= 0) {`
+  this is translating human readable ip to machine readable format and checking for cases of no success(when return is not 1 (>0))
 - What is happening in line 31 of `tcp-echo-client.cc`?
   `if (connect(my_sock, (sockaddr *)&address, sizeof(address)) < 0) {`
+  this initiates the 3 way TCP handshake and checks if its not successful(returns <0)
 - What is the difference between a pointer and a reference?
-  pointer ais the address to the memory location of a variable, a reference is what the pointer points too, the underlying piece of information. If we need to access the value from pointer we need to dereferenc it by *ptr
+  pointer is the address to the memory location of a variable, a reference is what the pointer points too, the underlying piece of information. If we need to access the value from pointer we need to dereferenc it by *ptr
 - When is it better to use a pointer?
   When we want just a symbol pointing to that variable in memory, and at times say in vectors if we want to easily jump to next/previous elements(by incrementing/decrementing pointers since contiguous memory taken by vectors)
 - When is it better to use a reference?
@@ -148,12 +157,17 @@ close it.
 
 - What is the most authoritative source of information about `socket()`
   from `<sys/socket.h>`?
+  linux man page
 - What is the most authoritative source of information about the TCP and IP
   protocols?
+  [Internet Engineering Task Force](https://www.ietf.org/)
 - What is the most authoritative source of information about the C++
   programming language?
   Bjarne Stroustrup's guide on C++!
 - What information can you find about using Markdown when structuring prompts 
   to LLMs?
+  since LLMs are heavily trained on data from platforms like GitHub and documentation sites they inherently understand and respond well to Markdown syntax.
 - What is the difference between LLM and AI?
+  AI is a very broad thing encompassing LLM, but LLM is just a large language model, capable of having conversations in natural language
 - Is it grammatically correct in English to say "a LLM" or "an LLM"? Why?
+  Since pronouncing LLM involves an "e" sound, it's gramatically correct to say "an LLM".
