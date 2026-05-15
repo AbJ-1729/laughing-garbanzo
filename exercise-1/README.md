@@ -13,7 +13,7 @@ Before you scroll down to the questions, try this:
    order, and how would you know when you've understood something well enough?
    Write that plan down in this README, then actually follow it.
 
-   I would first look up the provided reference manuals for g++, make, git and would research sources on web for sockets and memory management in C++
+   I would first look up the provided reference manuals for g++, make, git and would research sources on web for sockets and memory management in C++. I have compiled all the relevant sources in Notes.
 
 3. **Now go through the questions below and answer them like you're an LLM.**
    No live Googling, no Stack Overflow, no asking ChatGPT mid-question. You may
@@ -39,8 +39,11 @@ close it.
 - Answer the following questions in this file and commit and push your changes.
 - Bonus sections are more difficult and optional.
 - How can you find the information required to complete these tasks?
+-    I believe that official docs are the best source of truth, and in case of concepts like sockets and memory management, things referring to the official handbook.
 - How can you tell if the source of your information is good?
+-    As long as its a trusted source and has official sources backing, I believe its a "good" source of information 
 - How would you define "good" in this situation?
+-    Factually correct and comprehensive
 
 ## Learn Basics of g++ CLI
 
