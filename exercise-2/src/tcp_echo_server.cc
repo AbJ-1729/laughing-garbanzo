@@ -33,13 +33,13 @@ sockaddr_in create_address(int port) {
   return address;
 }
 
-void bind_address_to_socket(int sock, sockaddr_in &address) {
-  if (bind(sock, (sockaddr *)&address, sizeof(address)) < 0) {
-    std::cerr << "bind failed\n";
-    close(sock);
-    exit(EXIT_FAILURE);
-  }
-}
+// void bind_address_to_socket(int sock, sockaddr_in &address) {
+//   if (bind(sock, (sockaddr *)&address, sizeof(address)) < 0) {
+//     std::cerr << "bind failed\n";
+//     close(sock);
+//     exit(EXIT_FAILURE);
+//   }
+// }
 
 void listen_on_socket(int sock) {
   if (listen(sock, 3) < 0) {
@@ -53,7 +53,12 @@ void start_listening_on_socket(int my_socket, sockaddr_in &address) {
   const int kSocketOptions = 1;
   set_socket_options(my_socket, kSocketOptions);
 
-  bind_address_to_socket(my_socket, address);
+  // bind_address_to_socket(my_socket, address);
+  if (bind(my_socket, (sockaddr *)&address, sizeof(address)) < 0) {
+    std::cerr << "bind failed\n";
+    close(my_socket);
+    exit(EXIT_FAILURE);
+  }
   listen_on_socket(my_socket);
 }
 

@@ -49,9 +49,13 @@
 
 - Read the code in `src/`
 - Are there any bugs in this code? 
-  The code seems to be working perfectly without any modifications on testing it out by compiling, thus there are no bugs in the code
+  The code seems to be working perfectly without any modifications on testing it out by compiling, thus there seem to be no bugs in the code superficially, but there are some lines of code creating possible vulnerabilities.
+  SO_REUSEADDR and SO_REUSEPORT are distinct integer constants, not bitflags. Using the bitwise OR operator (|) passes an invalid integer to the kernel.
+  Passing the raw buffer to std::cout expects a null-terminated C-string. If the client sends exactly 1024 bytes (or data without a null terminator), std::cout will read past the buffer into adjacent memory.
+  The server handles one client sequentially. A slow client will freeze the server, preventing others from connecting.
+  The send() system call is not guaranteed to transmit the entire buffer in one go, thus we must loop until all bytes are sent.
 - What can you do to identify if there are bugs in the code?
-  We can use gdb debugger or use a c++ extension in the IDE
+  We can use gdb debugger or use a c++ extension in the IDE had there been a simple bug, but these bugs require analysing code and trying out edge cases
 
 ## Refactoring: Extract Function
 
@@ -62,6 +66,9 @@
 - What are the tradeoffs compared to exercise-1?
   Slightly more calls(calling functions) and bigger code, but extremely enhanced readability.
 - Are you able to spot any mistakes or inconsistencies in the changes?
+  Some code blocks are overly modularised and some are still clubbed 
+  e.g. Server: bind_address_to_socket() and listen_on_socket() are just single-purpose wrappers called immediately inside start_listening_on_socket(). They could simply be merged into the setup function.
+  Client: set_binary_address() does nothing but wrap inet_pton() and is only used inside create_address(). It could be used inline
   
 ## Thinking About Performance
 
@@ -81,8 +88,10 @@
 - Make sure to commit each change as small and self-contained commit
 - This will make it easier to revert your code if you need to
 - What is `git tag`? How is `git tag` different from `git branch`?
+  fgit tag just creates a pointer to a specific commit, whereas git branch creates a prallel working branch and the pointer moves with new commits on that specific branch
 - How can you use `git tag` and `git branch` to make programming easier and
   more fun?
+  git branch can be used in teamwork for parallel development which can later be merged, or say for separating dev build from main release build. git tag can be used for marking special commits, e.g. v1
 
 ## Learn Basics of Debugging in Your IDE
 
