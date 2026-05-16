@@ -49,7 +49,9 @@
 
 - Read the code in `src/`
 - Are there any bugs in this code? 
+  The code seems to be working perfectly without any modifications on testing it out by compiling, thus there are no bugs in the code
 - What can you do to identify if there are bugs in the code?
+  We can use gdb debugger or use a c++ extension in the IDE
 
 ## Refactoring: Extract Function
 

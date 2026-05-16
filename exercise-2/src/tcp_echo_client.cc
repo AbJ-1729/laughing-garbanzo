@@ -43,6 +43,7 @@ void connect_to_server(int sock, sockaddr_in &server_address) {
 void send_and_receive_message(int sock, const std::string &message) {
   const int kBufferSize = 1024;
   // #Question - is buffer the best name we can use?
+  // to make it more clear, we can say received_buffer, since it's specifically for receiving data from the server.
   char buffer[kBufferSize] = {0};
 
   // Send the message to the server
@@ -61,6 +62,7 @@ void send_and_receive_message(int sock, const std::string &message) {
 }
 
 // #Question - what can be improved in this function?
+// I think we can avoid exiting since there seems to be a default message present anyway, but I think it's good to have the usage message in case the user is confused about how to use the program. We can also consider allowing multiple arguments to be concatenated into a single message, rather than just taking the first argument as the message.
 std::string read_args(int argc, char *argv[]) {
   std::string message = "Hello from client";
   if (argc == 1) {
