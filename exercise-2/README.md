@@ -98,10 +98,15 @@
 - How do you enable debug mode in your IDE?
   Simply add a breakpoint by clicking on line number and then start debug functionality.
 - In debug mode, how do you add a watch?
+  right click the variable and add to watch
 - In debug mode, how do you add a breakpoint?
+  click on line number
 - In debug mode, how do you step through code?
+  there are commands in the gui like step in, step out, step over
 
 ### Memory Management and Debug Mode in Your IDE
 
 - How do you see the memory layout of a `std::string` from your IDE debug mode?
+  Get the address using &string_name, open IDE's Memory View, and look for the inline characters or follow the internal pointer to the heap.
 - How do you see the memory layout of a struct from your IDE debug mode?
+  Get the address using &struct_name, open Memory View, and look at the variables stored sequentially to spot compiler padding bytes.
