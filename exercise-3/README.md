@@ -8,7 +8,9 @@
 - A new function `check_error()` has been created and `create_socket()` from 
   exercise-2 has been refactored to make use of it
 - What are the benefits of writing code in this way?
+  By separating the check and the error handling into a separate function, we can reuse the error handling code across multiple functions that may encounter errors. This promotes code reusability and reduces duplication, making our code cleaner and easier to maintain.
 - Are there any costs to writing code like this?
+  There is a slight overhead because of additional function call, but it seems negligible contrasted with the advantage gained in terms of code clarity and modularity.
 - Apply `check_error` to all the code in `src/`
 
 ## Introduction to Compiler Explorer
