@@ -17,6 +17,12 @@ int create_socket() {
   int my_sock;
   check_error((my_sock = socket(AF_INET, SOCK_STREAM, 0)) < 0,
               "Socket creation error\n");
+  /*
+  if((my_sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+    std::cerr << "Socket creation error\n";
+    exit(EXIT_FAILURE);
+  }
+  */
   return my_sock;
 }
 
@@ -39,7 +45,6 @@ void bind_address_to_socket(int sock, sockaddr_in &address) {
   check_error(bind(sock, (sockaddr *)&address, sizeof(address)) < 0,
               "bind failed\n");
 }
-}
 
 void listen_on_socket(int sock) {
   check_error(listen(sock, 3) < 0,
@@ -47,7 +52,6 @@ void listen_on_socket(int sock) {
     close(sock);
     exit(EXIT_FAILURE);
   }
-}
 
 void start_listening_on_socket(int my_socket, sockaddr_in &address) {
   const int kSocketOptions = 1;
