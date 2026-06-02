@@ -37,10 +37,18 @@
 - Make sure you have `-fsanitize=address` in both your `CXX_FLAGS` and 
   `LD_FLAGS` in your Makefile
 - What do `-fsanitize=address`, `CXX_FLAGS` and `LD_FLAGS` mean?
+  -fsanitize=address enables the AddressSanitizer, a tool that detects memory errors such as buffer overflows. CXX_FLAGS are the flags passed to the C++ compiler, while LD_FLAGS are the flags passed to the linker during the linking stage of compilation.
 - With the new tool of the Compiler Explorer, and keeping in mind what you 
   have learned about how to use debug mode
 - What happens when you look at a `std::string` using the above methods?
+  On observing in godbolt, this is a basic string allocation in assembly code:
+   lea     rax, [rbp-48]
+        mov     esi, OFFSET FLAT:.LC0
+        mov     rdi, rax
+        call    "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::operator=(char const*)"
+  So the text in the `std::string` is stored in a dynamically allocated memory location, and the `std::string` object itself contains a pointer to that memory location. 
 - Where is the text in your `std::string`?
+  On the heap, as it is dynamically allocated memory.
 - What is `std::optional`?
 - How do you find out the memory layout of a `std::optional`?
 - Read https://en.cppreference.com/w/cpp/memory#Smart_pointers - Guide to 
