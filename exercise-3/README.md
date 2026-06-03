@@ -50,18 +50,24 @@
 - Where is the text in your `std::string`?
   On the heap, as it is dynamically allocated memory.
 - What is `std::optional`?
+  `std::optional` is a feature that represents an object that may or may not contain a value. It is a wrapper that can hold either a value of a specified type or no value at all, in which case it can be checked by comparing with std::nullopt. It avoids the need for sentinel values.
 - How do you find out the memory layout of a `std::optional`?
+  By referring to C++ documentation or using tools like Godbolt to inspect the assembly code generated for `std::optional` and understanding how it manages memory internally.
 - Read https://en.cppreference.com/w/cpp/memory#Smart_pointers - Guide to 
   modern C++ memory management using smart pointers
 - Which pointer types are the most important to know about?
+  I believe unique_ptr, shared_ptr, and weak_ptr are the most important smart pointer types to know about in C++. unique_ptr provides exclusive ownership of a resource, shared_ptr allows multiple pointers to share ownership of a resource, and weak_ptr is used to break circular references in shared ownership scenarios.
 - Which smart pointer should you use by default if you can?
+  unique_ptr should be used by default if you can, as it provides clear ownership semantics and is more efficient than shared_ptr when exclusive ownership is sufficient.
 - Does changing your optimization level in `CXXFLAGS` from `-O0` to `-O3` have
   any impact on the answers to any of the above questions?
+  The internal assembly code might aggressively optimize the code, but the high-level concepts of memory management and smart pointers remain largely unchanged.
 
 ## More Thinking About Performance
 
 - After your experiments with Compiler Explorer, do you have any updates for
   your answers in exercise-2?
+  Using compiler explorer we can clearly observe differences in how the actual compiled assembly code looks like, how its different in modular codding compared to all code in one main function. Though modular coding might seem to lead to more function calls, the compiler can optimize it in such a way that it doesn't necessarily lead to worse performance.
 
 ### Bonus: Do Not Watch Now 
 
@@ -76,14 +82,23 @@
     what the assembly looks like
   - What happens if you iterate the pointer to outside the bounds of your
     array?
+    It tries to access memory that is not allocated for the struct, which can lead to undefined behavior.
   - Let's say your struct is called `Foo`
   - What is the difference between `std::vector<Foo>` and `std::vector<Foo*>`?
+      `std::vector<Foo>` stores the actual objects of type Foo, while `std::vector<Foo*>` stores pointers to objects of type Foo. The former manages the memory for the objects automatically, while the latter requires manual memory management and can lead to issues such as memory leaks if not handled properly.
   - What are the tradeoffs between using `std::vector<Foo>` vs 
     `std::vector<Foo*>`? 
+    Using `std::vector<Foo>` is simpler and safer as it manages memory automatically, but it may involve more copying of objects if they are large. On the other hand, `std::vector<Foo*>` can be more efficient for large objects as it only stores pointers, but it requires careful memory management to avoid leaks and dangling pointers.
   - Give an example where `std::vector<Foo>` is a better choice than 
     `std::vector<Foo*>`
+    For reasonablty sized data, `std::vector<Foo>` is a better choice as it simplifies memory management and reduces the risk of memory leaks, e.g. Foo being a point struct with just 3 coordinates x,y,z;
   - Give another example where the opposite is true
+    In the scenario where Foo is the master struct containing all possible data linked to a student, and we have a vector of students, it would be more efficient to use `std::vector<Foo*>` to avoid copying large amounts of data for each student.
   - Can you create `std::vector<Foo&>`? 
+    No, you cannot create `std::vector<Foo&>` because C++ does not allow vectors of references. References in C++ must be initialized to refer to an object and cannot be reseated, which is incompatible with the way vectors manage their elements.
   - Can you create `std::vector<std::optional<Foo>>`?
+    Yes, you can create `std::vector<std::optional<Foo>>`. This allows you to have a vector of optional Foo objects, where each element can either contain a Foo object or be empty (std::nullopt).
   - What happens if your struct contains another struct?
+    If your struct contains another struct, it is called a nested struct. The memory layout of the outer struct will include the memory layout of the inner struct. You can access the members of the inner struct through the outer struct, and the compiler will handle the memory management for you.
   - What is the difference between a struct and a class?
+    fIn struct by default all members are public, while in class by default all members are private. Other than that, they are essentially the same in C++ and can be used interchangeably.
