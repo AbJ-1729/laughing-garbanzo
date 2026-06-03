@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build client",
+      "type": "shell",
+      "command": "mkdir -p build && g++ -std=c++20 -Wall -Wextra src/tcp_echo_client.cpp src/socket_utils.cpp -o build/tcp_echo_client",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "build server",
+      "type": "shell",
+      "command": "mkdir -p build && g++ -std=c++20 -Wall -Wextra src/tcp_echo_server.cpp src/socket_utils.cpp -o build/tcp_echo_server",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "build all",
+      "type": "shell",
+      "command": "mkdir -p build && g++ -std=c++20 -Wall -Wextra src/tcp_echo_client.cpp src/socket_utils.cpp -o build/tcp_echo_client && g++ -std=c++20 -Wall -Wextra src/tcp_echo_server.cpp src/socket_utils.cpp -o build/tcp_echo_server",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
